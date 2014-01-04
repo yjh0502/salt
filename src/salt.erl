@@ -84,7 +84,7 @@ crypto_scalarmult(Integer, Group_p) ->
 
 -spec crypto_scalarmult_base(binary()) -> resp_box().
 crypto_scalarmult_base(Integer) ->
-    salt_nif:salt_scalarmult(Integer).
+    salt_nif:salt_scalarmult_base(Integer).
 
 %% Signatures.
 -spec crypto_sign_keypair() -> {binary(), binary()}.
