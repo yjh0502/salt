@@ -4,6 +4,5 @@
    {modules, []},
    {registered, []},
    {applications, [kernel, stdlib]},
-   {mod, {salt_app, []}},
    {env, []}
   ]}.
