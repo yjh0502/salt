@@ -5,11 +5,21 @@
 
 Arch = erlang:system_info(system_architecture),
 
+PKGConfig = fun(Args) ->
+    {0, Value} = eunit_lib:command("pkg-config " ++ Args),
+    [C||C <- Value, C =/= $\n]
+end,
+
+CFLAGS = PKGConfig("--cflags libsodium"),
+LDFLAGS = PKGConfig("--libs libsodium"),
+
 %% Augment configuration from rebar.config with NIF settings.
 lists:keymerge(1,
     lists:keysort(1, [
-        {port_env, [{"DRV_CFLAGS", "$DRV_CFLAGS -Wall -Werror -I/usr/local/include/sodium"},
-		    {"DRV_LDFLAGS", "$DRV_LDFLAGS -L/usr/local/lib -Wl,-R/usr/local/lib -lsodium"}]},
+        {port_env, [
+            {"DRV_CFLAGS", "$DRV_CFLAGS -Wall -Werror " ++ CFLAGS},
+		    {"DRV_LDFLAGS", "$DRV_LDFLAGS " ++ LDFLAGS}
+        ]},
         {port_specs, [{filename:join(["priv", Arch, "salt_nif.so"]), ["c_src/salt_nif.c"]}]},
         {pre_hooks, [{clean, "rm -fr ebin erl_crash.dump salt_test.beam c_src/salt_nif.o priv/" ++ Arch}]}
     ]),
