@@ -1,11 +1,10 @@
-{application, salt,
-  [{description, "libsodium wrapper for erlang."},
-   {vsn, "0.1.1"},
-   {modules, []},
-   {registered, []},
-   {applications, [kernel, stdlib]},
-   {env, []},
-   {maintainers, ["Jihyun Yu"]},
-   {licenses, ["BSD"]},
-   {links, [{"Github", "https://github.com/yjh0502/salt"}]}
-]}.
+{application,salt,
+             [{description,"libsodium wrapper for erlang."},
+              {vsn,"0.1.1"},
+              {modules,[]},
+              {registered,[]},
+              {applications,[kernel,stdlib]},
+              {env,[]},
+              {maintainers,["Jihyun Yu"]},
+              {licenses,["BSD"]},
+              {links,[{"Github","https://github.com/yjh0502/salt"}]}]}.
